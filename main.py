@@ -1,15 +1,17 @@
 from flask import Flask,request,render_template,redirect
 from werkzeug.utils import secure_filename
-from NN.NN import get_image_disease
+from NN import get_image_disease
 import os
 import glob
 app = Flask(__name__)
 
 
-app.config["IMAGE_UPLOADS"] = "D:/site/static/Images"
+app.config["IMAGE_UPLOADS"] = "/opt/site/static/Images"
 #app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["PNG","JPG","JPEG"]
 
-
+@app.route("/")
+def index():
+            return "<h1>Hello!</h1>"
 
 @app.route('/home',methods = ["GET","POST"])
 def upload_image():
@@ -30,9 +32,9 @@ def upload_image():
 		filename = secure_filename(image.filename)
 		image.save(os.path.join(basedir,app.config["IMAGE_UPLOADS"],filename))
 
-		disease, description = get_image_disease(filename)
+		disease = get_image_disease(filename)
 
-		return render_template("main.html",filename=filename, disease=disease, description = description)
+		return render_template("main.html",filename=filename, disease=disease)
 
 	return render_template('main.html')
 
@@ -40,5 +42,6 @@ def upload_image():
 def display_image(filename):
 	return redirect(url_for('static',filename = "/Images" + filename), code=301)
 
-
-app.run(debug=True,port=2000)
+if __name__ == "__main__":
+        from waitress import serve
+        serve(app, host="0.0.0.0", port=8080)
