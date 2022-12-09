@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Plant Disease Detector</title>
+</head>
+
+<body>
+	<center>
+		<h1>Plant Disease Detector</h1>
+		{% if not filename %}
+		<p>On this site you can download a photo of the plant and find out if it is diseased, and if so, what disease it
+			is.
+		</p>
+		<p>To analyze a plant, click on the button below and upload a photo of your plant.</p>
+		<p>Try to keep the plant completely in the frame.</p>
+		<form method="post" action="/home" enctype="multipart/form-data">
+			<p>
+				<input type="file" name="file" autocomplete="off" required>
+			</p>
+			<p>
+				<input type="submit" value="Upload image">
+			</p>
+		</form>
+		{% else %}
+		<div>
+			<h2>Your plant:</h2>
+			<img src="{{ url_for('static', filename='/Images/'+filename) }}">
+			<h2>Diagnosis: </h2>
+			<h3>{% print(disease) %}</h3>
+			<h2>Information about the diagnosis</h2>
+			<div class="description" style="width: 50%; text-align: left">
+				{% for para in description %}
+				<p>{{para}}</p>
+				{% endfor %}
+			</div>
+			<a href="/home" style="font-size: 28px">Let's go back</a>
+		</div>
+		{% endif %}
+	</center>
+</body>
+
+</html>
