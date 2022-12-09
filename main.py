@@ -6,7 +6,7 @@ import glob
 app = Flask(__name__)
 
 
-app.config["IMAGE_UPLOADS"] = "/opt/site/static/Images"
+app.config["IMAGE_UPLOADS"] = "/opt/Plant-Disease-Detector/static/Images"
 #app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["PNG","JPG","JPEG"]
 
 @app.route("/")
