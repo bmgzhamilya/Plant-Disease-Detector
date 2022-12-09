@@ -32,9 +32,9 @@ def upload_image():
 		filename = secure_filename(image.filename)
 		image.save(os.path.join(basedir,app.config["IMAGE_UPLOADS"],filename))
 
-		disease = get_image_disease(filename)
+		disease, description = get_image_disease(filename)
 
-		return render_template("main.html",filename=filename, disease=disease)
+		return render_template("main.html",filename=filename, disease=disease, description=description)
 
 	return render_template('main.html')
 
