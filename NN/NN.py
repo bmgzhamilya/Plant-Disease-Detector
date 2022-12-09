@@ -4,7 +4,7 @@ from NN.NN_info import *
 def get_image_disease(filename):
     trains = train
 
-    images_folder = "/opt/site/static/"
+    images_folder = "/opt/Plant-Disease-Detector/static/"
     train_transform = transforms.Compose([
         transforms.Resize((256,256)),
         transforms.ToTensor()
