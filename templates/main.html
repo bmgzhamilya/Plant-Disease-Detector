@@ -28,7 +28,7 @@
 		{% else %}
 		<div>
 			<h2>Your plant:</h2>
-			<img src="{{ url_for('static', filename='/Images/'+filename) }}">
+			<img src="{{ url_for('static', filename='/Images/'+filename) }}" style="max-width: 256px;height: auto;">
 			<h2>Diagnosis: </h2>
 			<h3>{% print(disease) %}</h3>
 			<h2>Information about the diagnosis</h2>
