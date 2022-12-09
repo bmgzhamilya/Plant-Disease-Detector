@@ -1,6 +1,6 @@
 from flask import Flask,request,render_template,redirect
 from werkzeug.utils import secure_filename
-from NN import get_image_disease
+from NN.NN import get_image_disease
 import os
 import glob
 app = Flask(__name__)
