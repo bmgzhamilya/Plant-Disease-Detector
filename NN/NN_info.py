@@ -7,8 +7,16 @@ from torch.utils.data import DataLoader # for dataloaders
 import torchvision.transforms as transforms   # for transforming images into tensors 
 from torchvision.datasets import ImageFolder  # for working with classes and images
 from PIL import Image
+import cv2
 
 device = torch.device("cpu")
+
+class disease_response:
+    def __init__(self, file_type, disease, description, most_common):
+        self.file_type = file_type
+        self.disease = disease
+        self.description = description
+        self.most_common = most_common
 
 class train:
     classes = ['Apple___Apple_scab',

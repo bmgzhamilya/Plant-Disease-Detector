@@ -1,0 +1,1 @@
+path_to_directory = 'D:/new_site/Plant-Disease-Detector/'

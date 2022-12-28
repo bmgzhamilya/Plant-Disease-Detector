@@ -25,15 +25,36 @@
 				<input type="submit" value="Upload image">
 			</p>
 		</form>
-		{% else %}
+		{% elif filename and response.file_type == "IMAGE" %}
 		<div>
 			<h2>Your plant:</h2>
-			<img src="{{ url_for('static', filename='/Images/'+filename) }}" style="max-width: 256px;height: auto;">
+			<img src="{{ url_for('static', filename='/Images/Uploads/'+filename) }}" style="max-width: 256px;height: auto;">
 			<h2>Diagnosis: </h2>
-			<h3>{% print(disease) %}</h3>
+			<h3>{% print(response.disease[0]) %}</h3>
 			<h2>Information about the diagnosis</h2>
 			<div class="description" style="width: 350px; text-align: left">
-				{% for para in description %}
+				{% for para in response.description %}
+				<p>{{para}}</p>
+				{% endfor %}
+			</div>
+			<a href="/home" style="font-size: 28px">Let's go back</a>
+		</div>
+		{% else %}
+		<div>
+			<h2>Your plant video:</h2>
+			<video width="320" height="240" controls>
+				<source src="{{  url_for('static', filename='/Videos/'+filename) }}" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>
+			<h2>Diagnoses: </h2>
+			<div>
+				{% for d in response.most_common %}
+				<p>{{d[0]}}: {{d[1]}}</p>
+				{% endfor %}
+			</div>
+			<h2>By seconds</h2>
+			<div class="description" style="width: 500px; text-align: left">
+				{% for para in response.disease %}
 				<p>{{para}}</p>
 				{% endfor %}
 			</div>
